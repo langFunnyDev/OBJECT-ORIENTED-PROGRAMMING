@@ -160,8 +160,11 @@ int main() {
     std::cout << "Creating circle: " << std::endl;
     MyCircle.input();
 
+    std::cout << "Output triangle: " << std::endl;
     MyTriangle.output();
+    std::cout << "Output quadrangle: " << std::endl;
     MyQuadrangle.output();
+    std::cout << "Output circle: " << std::endl;
     MyCircle.output();
 
     return 0;
