@@ -1,3 +1,6 @@
+#define _USE_2_OR_3_DIMENSION 2
+#define _USE_POLAR_COORDINATES false
+
 #define _USE_MATH_DEFINES
 #include <iostream>
 #include <string>
@@ -10,8 +13,10 @@ private:
     std::string name;
     int _x;
     int _y;
+    int _z;
 public:
     Point(std::string name, int x, int y) : name(std::move(name)), _x(x), _y(y) {}
+    Point(std::string name, int x, int y, int z) : name(std::move(name)), _x(x), _y(y), _z(z) {}
 
     const std::string &getName() const {
         return name;
@@ -24,6 +29,10 @@ public:
     int getY() const {
         return _y;
     }
+
+    int getZ() const {
+        return _z;
+    }
 };
 
 class Figure {
@@ -34,11 +43,21 @@ public:
     virtual void input() = 0;
     virtual std::string getName() = 0;
     static double distance (Point &A, Point &B) {
-        return sqrt(
-                (A.getX() - B.getX()) * (A.getX() - B.getX())
-                +
-                (A.getY() - B.getY()) * (A.getY() - B.getY())
-        );
+        if(_USE_2_OR_3_DIMENSION == 2){
+            return sqrt(
+                    (A.getX() - B.getX()) * (A.getX() - B.getX())
+                    +
+                    (A.getY() - B.getY()) * (A.getY() - B.getY())
+            );
+        } else {
+            return sqrt(
+                    (A.getX() - B.getX()) * (A.getX() - B.getX())
+                    +
+                    (A.getY() - B.getY()) * (A.getY() - B.getY())
+                    +
+                    (A.getZ() - B.getZ()) * (A.getZ() - B.getZ())
+            );
+        }
     }
     virtual double perimeter() = 0;
     virtual double square() = 0;
@@ -49,17 +68,33 @@ class Triangle : public Figure {
 public:
     void input() override {
         std::string name;
-        int x, y;
+        double r, fi;
+        int x, y, z;
         std::cout << "Enter a name for figure: ";
         std::cin >> _name;
         for(int i = 0; i < 3; ++i){
             std::cout << "Enter a name for point #" << i + 1 << ": ";
             std::cin >> name;
-            std::cout << "    Enter coordinate X:";
-            std::cin >> x;
-            std::cout << "    Enter coordinate Y:";
-            std::cin >> y;
-            _PointsStorage.emplace_back(Point(name, x, y));
+            if(_USE_POLAR_COORDINATES){
+                std::cout << "    Enter r:";
+                std::cin >> r;
+                std::cout << "    Enter coordinate fi:";
+                std::cin >> fi;
+                x = r * cos(fi);
+                y = r * sin(fi)
+            } else {
+                std::cout << "    Enter coordinate X:";
+                std::cin >> x;
+                std::cout << "    Enter coordinate Y:";
+                std::cin >> y;
+            }
+            if(_USE_2_OR_3_DIMENSION == 3){
+                std::cout << "    Enter coordinate Z:";
+                std::cin >> z;
+                _PointsStorage.emplace_back(Point(name, x, y, z));
+            } else {
+                _PointsStorage.emplace_back(Point(name, x, y));
+            }
         }
     }
 
@@ -102,7 +137,7 @@ class Quadrangle : public Figure {
 public:
     void input() override {
         std::string name;
-        int x, y;
+        int x, y, z;
         std::cout << "Enter a name for figure: ";
         std::cin >> _name;
         for(int i = 0; i < 4; ++i){
@@ -112,7 +147,13 @@ public:
             std::cin >> x;
             std::cout << "    Enter coordinate Y:";
             std::cin >> y;
-            _PointsStorage.emplace_back(Point(name, x, y));
+            if(_USE_2_OR_3_DIMENSION == 3){
+                std::cout << "    Enter coordinate Z:";
+                std::cin >> z;
+                _PointsStorage.emplace_back(Point(name, x, y, z));
+            } else {
+                _PointsStorage.emplace_back(Point(name, x, y));
+            }
         }
     }
 
@@ -148,7 +189,7 @@ class Circle : public Figure {
 public:
     void input() override {
         std::string name;
-        int x, y;
+        int x, y, z;
         std::cout << "Enter a name for figure: ";
         std::cin >> _name;
         for(int i = 0; i < 2; ++i){
@@ -158,7 +199,13 @@ public:
             std::cin >> x;
             std::cout << "    Enter coordinate Y:";
             std::cin >> y;
-            _PointsStorage.emplace_back(Point(name, x, y));
+            if(_USE_2_OR_3_DIMENSION == 3){
+                std::cout << "    Enter coordinate Z:";
+                std::cin >> z;
+                _PointsStorage.emplace_back(Point(name, x, y, z));
+            } else {
+                _PointsStorage.emplace_back(Point(name, x, y));
+            }
         }
     }
 
