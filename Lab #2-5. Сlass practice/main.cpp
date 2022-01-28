@@ -81,7 +81,7 @@ public:
                 std::cout << "    Enter coordinate fi:";
                 std::cin >> fi;
                 x = r * cos(fi);
-                y = r * sin(fi)
+                y = r * sin(fi);
             } else {
                 std::cout << "    Enter coordinate X:";
                 std::cin >> x;
@@ -137,16 +137,26 @@ class Quadrangle : public Figure {
 public:
     void input() override {
         std::string name;
+        double r, fi;
         int x, y, z;
         std::cout << "Enter a name for figure: ";
         std::cin >> _name;
         for(int i = 0; i < 4; ++i){
             std::cout << "Enter a name for point #" << i + 1 << ": ";
             std::cin >> name;
-            std::cout << "    Enter coordinate X:";
-            std::cin >> x;
-            std::cout << "    Enter coordinate Y:";
-            std::cin >> y;
+            if(_USE_POLAR_COORDINATES){
+                std::cout << "    Enter r:";
+                std::cin >> r;
+                std::cout << "    Enter coordinate fi:";
+                std::cin >> fi;
+                x = r * cos(fi);
+                y = r * sin(fi);
+            } else {
+                std::cout << "    Enter coordinate X:";
+                std::cin >> x;
+                std::cout << "    Enter coordinate Y:";
+                std::cin >> y;
+            }
             if(_USE_2_OR_3_DIMENSION == 3){
                 std::cout << "    Enter coordinate Z:";
                 std::cin >> z;
@@ -189,16 +199,26 @@ class Circle : public Figure {
 public:
     void input() override {
         std::string name;
+        double r, fi;
         int x, y, z;
         std::cout << "Enter a name for figure: ";
         std::cin >> _name;
         for(int i = 0; i < 2; ++i){
             std::cout << "Enter a name for point #" << i + 1 << ": ";
             std::cin >> name;
-            std::cout << "    Enter coordinate X:";
-            std::cin >> x;
-            std::cout << "    Enter coordinate Y:";
-            std::cin >> y;
+            if(_USE_POLAR_COORDINATES){
+                std::cout << "    Enter r:";
+                std::cin >> r;
+                std::cout << "    Enter coordinate fi:";
+                std::cin >> fi;
+                x = r * cos(fi);
+                y = r * sin(fi);
+            } else {
+                std::cout << "    Enter coordinate X:";
+                std::cin >> x;
+                std::cout << "    Enter coordinate Y:";
+                std::cin >> y;
+            }
             if(_USE_2_OR_3_DIMENSION == 3){
                 std::cout << "    Enter coordinate Z:";
                 std::cin >> z;
