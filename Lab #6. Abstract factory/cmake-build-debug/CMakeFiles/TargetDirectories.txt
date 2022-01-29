@@ -1,0 +1,3 @@
+C:/OBJECT-ORIENTED-PROGRAMMING/Lab #6. Abstract factory/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+C:/OBJECT-ORIENTED-PROGRAMMING/Lab #6. Abstract factory/cmake-build-debug/CMakeFiles/Lab__6__Abstract_factory.dir
+C:/OBJECT-ORIENTED-PROGRAMMING/Lab #6. Abstract factory/cmake-build-debug/CMakeFiles/edit_cache.dir
